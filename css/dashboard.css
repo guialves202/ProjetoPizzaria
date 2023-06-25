@@ -1,0 +1,129 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans',sans-serif;
+}
+
+#nav {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
+#nav a img {
+    width: 10vh;
+    height: 10vh;
+}
+
+#nav h1 {
+    color: white;
+    margin-left: 30px;
+    font-size: 18px;
+} 
+
+#content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 7vh;
+    width: 100%;
+    padding-bottom: 16vh;
+}
+
+#form {
+    margin-top: 5vh;
+    width: 70%;
+}
+
+#table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#table tr {
+    border-top: 1px solid rgba(0, 0, 0, 0.301);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.301);
+    height: 10vh;
+}
+
+#table td {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    vertical-align: top;
+}
+
+#table ul {
+    text-align: left;
+    padding-left: 10vh;
+}
+
+#table select {
+    width: 80%;
+    padding: 1vh;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.288);
+    color: #333;
+}
+
+#table button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.td-button-x {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow-button {
+    width: 10%;
+    float: right;
+}
+
+.x-button {
+    
+}
+
+.arrow {
+    font-size: 20px;
+    color: blue;
+}
+
+.x {
+    font-size: 20px;
+    color: red;
+}
+
+
+#footer {
+    background-color: black;
+    margin-top: 20vh;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 16vh;
+    position: absolute;
+    bottom: 0;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
+}
+
+#footer h1{
+    color: white;
+    font-size: 15px;
+    
+}
