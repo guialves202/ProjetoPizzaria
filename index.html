@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria do João</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <nav id="nav">
+            <a href="#"><img src="./img/92d75abef1c7523630339a2793eba5eb-fatia-de-traa-o-de-cor-de-pizza.png" alt="pizza"></a>
+            <h1>Peça sua pizza</h1>
+        </nav>
+        <div id="header-content">
+            <h1>FAÇA SEU PEDIDO</h1>
+        </div>
+    </div>
+    <div id="content">
+        <h1>Monte a pizza como desejar:</h1>
+        <form id="form">
+
+            <label for="borda">Borda:</label>
+
+            <select name="borda" class="select">
+                <option value="catupiry">Catupiry</option>
+                <option value="cheddar">Cheddar</option>
+            </select>
+
+
+            <label for="massa">Massa:</label>
+
+            <select name="massa" class="select">
+                <option value="tradicional">Tradicional</option>
+                <option value="integral">Integral</option>
+            </select>
+
+
+            <label for="sabores">Sabores: (Máximo 3)</label>
+            <select name="sabores" id="sabores" multiple size="5">
+                <option value="frango-catupiry">Frango com Catupiry</option>
+                <option value="frango-catupiry">Frango com Catupiry</option>
+                <option value="frango-catupiry">Frango com Catupiry</option>
+                <option value="frango-catupiry">Frango com Catupiry</option>
+                <option value="frango-catupiry">Frango com Catupiry</option>
+                <option value="frango-catupiry">Frango com Catupiry</option>
+                <option value="frango-catupiry">Frango com Catupiry</option>
+            </select>
+
+
+            <button type="submit" id="submit-pedido">Fazer pedido!</button>
+
+        </form>
+    </div>
+    <div id="footer">
+        <h1>Pizzaria do João 2023</h1>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
