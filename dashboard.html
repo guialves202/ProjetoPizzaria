@@ -11,7 +11,6 @@
     <script src="https://kit.fontawesome.com/4eb57e4054.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <p id="testeDB"></p>
     <nav id="nav">
         <a href="#"><img src="./img/92d75abef1c7523630339a2793eba5eb-fatia-de-traa-o-de-cor-de-pizza.png" alt="pizza"></a>
         <h1>Peça sua pizza</h1>
@@ -19,189 +18,41 @@
     <div id="content">
         <h1>Gerenciar pedidos:</h1>
         <form id="form">
-            <table id="table">
-                <tr>
-                    <th>Pedido #</th>
-                    <th>Borda</th>
-                    <th>Massa</th>
-                    <th>Sabores</th>
-                    <th>Status</th>
-                    <th>Ações</th>
+            <table id="form-table">
+                <tr class="row first-row">
+                    <th class="column1 column1-title">Pedido #</th>
+                    <th class="column2 column2-title">Borda</th>
+                    <th class="column3 column3-title">Massa</th>
+                    <th class="column4 column4-title">Sabores</th>
+                    <th class="column5 column5-title">Status</th>
+                    <th class="column6 column6-title">Ações</th>
                 </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Cheddar</td>
-                    <td>Massa Comum</td>
-                    <td>
+                <tr class="row">
+                    <td class="column1 column1-rows"></td>
+                    <td class="column2 column2-rows">Cheddar</td>
+                    <td class="column3 column3-rows">Massa Comum</td>
+                    <td class="column4 column4-rows">
                         <ul>
                             <li>4 Queijos</li>
                             <li>Frango com Catupiry</li>
                             <li>Lombinho</li>
-                            <li>Lombinho</li>
                         </ul>
                     </td>
-                    <td>
+                    <td class="column5 column5-rows">
                         <select>
                             <option>Concluído</option>
                             <option>Em Produção</option>
                             <option>Em Entrega</option>
                         </select>
-                        <button type="submit" class="arrow-button"><span class="arrow"><i class="fa-solid fa-arrows-rotate"></i></span></button>
+                        <button type="submit"><span><i class="fa-solid fa-arrows-rotate"></i></span></button>
+                        
                     </td>
-                    <td class="td-button-x">
-                        <button type="submit" class="x-button"><span class="x"><i class="fa-solid fa-x"></i></span></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Cheddar</td>
-                    <td>Massa Comum</td>
-                    <td>
-                        <ul>
-                            <li>4 Queijos</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Concluído</option>
-                            <option>Em Produção</option>
-                            <option>Em Entrega</option>
-                        </select>
-                        <button type="submit" class="arrow-button"><span class="arrow"><i class="fa-solid fa-arrows-rotate"></i></span></button>
-                    </td>
-                    <td class="td-button-x">
-                        <button type="submit" class="x-button"><span class="x"><i class="fa-solid fa-x"></i></span></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Cheddar</td>
-                    <td>Massa Comum</td>
-                    <td>
-                        <ul>
-                            <li>4 Queijos</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Concluído</option>
-                            <option>Em Produção</option>
-                            <option>Em Entrega</option>
-                        </select>
-                        <button type="submit" class="arrow-button"><span class="arrow"><i class="fa-solid fa-arrows-rotate"></i></span></button>
-                    </td>
-                    <td class="td-button-x">
-                        <button type="submit" class="x-button"><span class="x"><i class="fa-solid fa-x"></i></span></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Cheddar</td>
-                    <td>Massa Comum</td>
-                    <td>
-                        <ul>
-                            <li>4 Queijos</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Concluído</option>
-                            <option>Em Produção</option>
-                            <option>Em Entrega</option>
-                        </select>
-                        <button type="submit" class="arrow-button"><span class="arrow"><i class="fa-solid fa-arrows-rotate"></i></span></button>
-                    </td>
-                    <td class="td-button-x">
-                        <button type="submit" class="x-button"><span class="x"><i class="fa-solid fa-x"></i></span></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Cheddar</td>
-                    <td>Massa Comum</td>
-                    <td>
-                        <ul>
-                            <li>4 Queijos</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Concluído</option>
-                            <option>Em Produção</option>
-                            <option>Em Entrega</option>
-                        </select>
-                        <button type="submit" class="arrow-button"><span class="arrow"><i class="fa-solid fa-arrows-rotate"></i></span></button>
-                    </td>
-                    <td class="td-button-x">
-                        <button type="submit" class="x-button"><span class="x"><i class="fa-solid fa-x"></i></span></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Cheddar</td>
-                    <td>Massa Comum</td>
-                    <td>
-                        <ul>
-                            <li>4 Queijos</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Concluído</option>
-                            <option>Em Produção</option>
-                            <option>Em Entrega</option>
-                        </select>
-                        <button type="submit" class="arrow-button"><span class="arrow"><i class="fa-solid fa-arrows-rotate"></i></span></button>
-                    </td>
-                    <td class="td-button-x">
-                        <button type="submit" class="x-button"><span class="x"><i class="fa-solid fa-x"></i></span></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Cheddar</td>
-                    <td>Massa Comum</td>
-                    <td>
-                        <ul>
-                            <li>4 Queijos</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Concluído</option>
-                            <option>Em Produção</option>
-                            <option>Em Entrega</option>
-                        </select>
-                        <button type="submit" class="arrow-button"><span class="arrow"><i class="fa-solid fa-arrows-rotate"></i></span></button>
-                    </td>
-                    <td class="td-button-x">
-                        <button type="submit" class="x-button"><span class="x"><i class="fa-solid fa-x"></i></span></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td>Cheddar</td>
-                    <td>Massa Comum</td>
-                    <td>
-                        <ul>
-                            <li>4 Queijos</li>
-                        </ul>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Concluído</option>
-                            <option>Em Produção</option>
-                            <option>Em Entrega</option>
-                        </select>
-                        <button type="submit" class="arrow-button"><span class="arrow"><i class="fa-solid fa-arrows-rotate"></i></span></button>
-                    </td>
-                    <td class="td-button-x">
-                        <button type="submit" class="x-button"><span class="x"><i class="fa-solid fa-x"></i></span></button>
+                    <td class="column6 column6-rows">
+                        <button type="submit"><span><i class="fa-solid fa-x"></i></span></button>
                     </td>
                 </tr>
             </table>
-        </form>
-    </div>
+        </form>   
     <div id="footer">
         <h1>Pizzaria do João 2023</h1>
     </div>

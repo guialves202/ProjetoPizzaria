@@ -25,39 +25,40 @@
 
             <label for="borda">Borda:</label>
 
-            <select name="borda" class="select">
-                <option value="catupiry">Catupiry</option>
-                <option value="cheddar">Cheddar</option>
+            <select name="borda" class="select" id="borda">
+                <option value="1">Catupiry</option>
+                <option value="2">Cheddar</option>
             </select>
 
 
             <label for="massa">Massa:</label>
 
-            <select name="massa" class="select">
-                <option value="tradicional">Tradicional</option>
-                <option value="integral">Integral</option>
-                <option value="integral">Temperada</option>
+            <select name="massa" class="select" id="massa">
+                <option value="1">Comum</option>
+                <option value="2">Integral</option>
+                <option value="3">Temperada</option>
             </select>
 
 
             <label for="sabores">Sabores: (Máximo 3)</label>
             <select name="sabores" id="sabores" multiple size="5">
-                <option value="frango-catupiry">Frango com Catupiry</option>
-                <option value="frango-catupiry">Calabresa</option>
-                <option value="frango-catupiry">Lombinho</option>
-                <option value="frango-catupiry">Filé com Cheddar</option>
-                <option value="frango-catupiry">Portuguesa</option>
-                <option value="frango-catupiry">Margherita</option>
+                <option value="1">4 Queijos</option>
+                <option value="2">Frango com Catupiry</option>
+                <option value="3">Calabresa</option>
+                <option value="4">Lombinho</option>
+                <option value="5">Filé com Cheddar</option>
+                <option value="6">Portuguesa</option>
+                <option value="7">Margherita</option>
             </select>
 
 
-            <button type="submit" id="submit-pedido">Fazer pedido!</button>
+            <button id="submit-pedido" onclick="orderPizza()">Fazer pedido!</button>
 
         </form>
     </div>
     <div id="footer">
         <h1>Pizzaria do João 2023</h1>
     </div>
-    <script src="js/script.js"></script>
+    <script src="js/teste.js"></script>
 </body>
 </html>
