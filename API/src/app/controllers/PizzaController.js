@@ -8,7 +8,10 @@ class PizzaController {
     }
 
     async store(req,res) {
-        const content = await PizzaRepository.create();
+        const body = req.body;
+        const bodyContent = JSON.parse(JSON.stringify(body));
+
+        const content = await PizzaRepository.create(bodyContent);
         res.json(content);
     }
 

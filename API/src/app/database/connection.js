@@ -24,10 +24,10 @@ class DataBase {
         })
     }
 
-    doQuery(sql) {
+    doQuery(sql,params='',msgReject) {
         return new Promise((resolve,reject) => {
-            this.connection.query(sql, (err,resultado) => {
-                if(err) return reject(console.log(err));
+            this.connection.query(sql, params, (err,resultado) => {
+                if(err) return reject(msgReject, err);
                 const jsonResult = JSON.parse(JSON.stringify(resultado));
                 return resolve(jsonResult);
             })
