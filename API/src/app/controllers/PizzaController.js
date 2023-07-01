@@ -2,9 +2,8 @@ import PizzaRepository from "../repositories/PizzaRepository.js";
 
 class PizzaController {
 
-    async index(req,res) {
-        const content = await PizzaRepository.findAll();
-        res.json(content);
+    async index(pedidoID) {
+        const content = await PizzaRepository.findAll(pedidoID);
     }
 
     async store(req,res) {
@@ -13,6 +12,7 @@ class PizzaController {
 
         const content = await PizzaRepository.create(bodyContent);
         res.json(content);
+        console.log(this?.index);
     }
 
     async update(req,res) {

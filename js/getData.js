@@ -1,3 +1,9 @@
+async function getOrders() {
+    const response = await fetch('http://localhost:3000/orders')
+
+}
+
+
 const table = document.querySelector('#form-table');
 const tr = document.createElement('tr');
 tr.setAttribute('class','row content-row');
@@ -8,6 +14,8 @@ const td3 = document.createElement('td');
 const td4 = document.createElement('td');
 const td5 = document.createElement('td');
 const td6 = document.createElement('td');
+
+td1.textContent = '10';
 
 td1.setAttribute('class','column1 column1-rows');
 td2.setAttribute('class','column2 column2-rows');
