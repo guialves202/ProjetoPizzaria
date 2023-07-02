@@ -6,6 +6,6 @@ const router = Router();
 router.post('/order', PizzaController.store);
 router.get('/orders', PizzaController.index);
 router.put('/order', PizzaController.update);
-//router.delete('/orders', PizzaController.delete);
+router.delete('/order', PizzaController.delete);
 
 export default router;

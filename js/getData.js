@@ -1,8 +1,7 @@
-const table = document.querySelector('#form-table');
-
 async function getOrders() {
-    return (await fetch('http://localhost:3000/orders')).json()
+    return (await fetch('http://localhost:3000/orders')).json();
 }
+
 
 function createNode(elementType, type = '', content = '') {
     const element = document.createElement(elementType);
@@ -18,7 +17,7 @@ function append(parent, element) {
     parent.appendChild(element);
 }
 
-function createSelect() {
+function createSelect(status) {
     const select = createNode('select');
 
     const option1 = createNode('option');
@@ -37,6 +36,8 @@ function createSelect() {
     append(select, option2);
     append(select, option3);
 
+    select.value = status;
+
     return select;
 }
 
@@ -54,64 +55,67 @@ function createButton(className, event) {
     return button;
 }
 
-const tr = createNode('tr');
-tr.setAttribute('class','row content-row');
-
-async function insertData() {
+async function showRows() {
+    
+    const table = document.querySelector('#form-table');
     const data = await getOrders();
-    for(key in data) {
-        switch (key) {
-            case 'pedido_id':
-                const td1 = createNode('td', 'class', 'column1 column1-rows');
-                td1.textContent = data[key];
-                append(tr, td1);
-                break;
-
-            case 'tipo_borda':
-                const td2 = createNode('td', 'class', 'column2 column2-rows');
-                td2.textContent = data[key];
-                append(tr, td2);
-                break;
-
-            case 'tipo_massa':
-                const td3 = createNode('td', 'class', 'column3 column3-rows');
-                td3.textContent = data[key];
-                append(tr, td3);
-                break;
-            
-            case 'sabor':
-                const td4 = createNode('td', 'class', 'column4 column4-rows');
-                const sabores = data[key].split(',');
-                const ul = createNode('ul');
-                for(let i = 0; i < sabores.length; i++) {
-                    const li = createNode('li');
-                    li.textContent = sabores[i]
-                    append(ul, li);
-                }
-                append(td4, ul);
-                append(tr, td4);
-                break;
-
-            case 'status':
-                const td5 = createNode('td', 'class', 'column5 column5-rows');
-                const select = createSelect();
-                const button = createButton('fa-solid fa-arrows-rotate', updateStatus);
-                append(td5, select);
-                append(td5, button);
-                append(tr, td5)
-                break;
+    data.forEach(obj => {
+        const tr = createNode('tr','class','row content-row');
+        for(const key in obj) {
+            switch (key) {
+                case 'pedido_id':
+                    const td1 = createNode('td', 'class', 'column1 column1-rows');
+                    td1.textContent = obj[key];
+                    append(tr, td1);
+                    break;
+    
+                case 'tipo_borda':
+                    const td2 = createNode('td', 'class', 'column2 column2-rows');
+                    td2.textContent = obj[key];
+                    append(tr, td2);
+                    break;
+    
+                case 'tipo_massa':
+                    const td3 = createNode('td', 'class', 'column3 column3-rows');
+                    td3.textContent = obj[key];
+                    append(tr, td3);
+                    break;
+                
+                case 'sabor':
+                    const td4 = createNode('td', 'class', 'column4 column4-rows');
+                    const sabores = obj[key].split(',');
+                    const ul = createNode('ul');
+                    for(let i = 0; i < sabores.length; i++) {
+                        const li = createNode('li');
+                        li.textContent = sabores[i]
+                        append(ul, li);
+                    }
+                    append(td4, ul);
+                    append(tr, td4);
+                    break;
+    
+                case 'status':
+                    const td5 = createNode('td', 'class', 'column5 column5-rows');
+                    const select = createSelect(obj[key]);
+                    const button = createButton('fa-solid fa-arrows-rotate', updateStatus);
+                    append(td5, select);
+                    append(td5, button);
+                    append(tr, td5)
+                    break;
+            }
         }
-    }
-
-    const td6 = createNode('td', 'class', 'column6 column6-rows');
-    const button = createButton('fa-solid fa-x');
-    append(td6, button);
-    append(tr, td6);
-    append(table,tr);
+        const td6 = createNode('td', 'class', 'column6 column6-rows');
+        const button = createButton('fa-solid fa-x', deleteOrder);
+        append(td6, button);
+        append(tr, td6);
+        append(table,tr);
+    });
+    
+    
 
 }
 
-insertData();
+showRows();
 
 async function updateStatus(event) {
 
@@ -123,8 +127,11 @@ async function updateStatus(event) {
     const tr = td.parentNode;
     const pedido = tr.querySelector('.column1');
 
-    const insertData = [select.value, pedido.textContent];
-    console.log(insertData);
+    const data = [
+        {status_id: select.value},
+        pedido.textContent
+    ]
+    const insertData = JSON.stringify(data);
 
     const response = await fetch("http://localhost:3000/order", {
         method: "PUT",
@@ -133,4 +140,36 @@ async function updateStatus(event) {
             "Content-Type": "application/json"
         }
     })
+}
+
+async function deleteOrder(event) {
+    
+    event.preventDefault();
+    const tr = this.parentNode.parentNode;
+    const pedido = tr.querySelector('.column1');
+
+    const data = {pedido_id: pedido.textContent}
+    const insertData = JSON.stringify(data);
+
+    const response = await fetch("http://localhost:3000/order", {
+        method: "DELETE",
+        body: insertData,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    tr.remove();
+}
+
+
+const messageDiv = document.querySelector('#message-div');
+const statusFail = document.querySelector('.status.fail');
+const statusSucess = document.querySelector('.status.sucess');
+const deleteSucess = document.querySelector('.delete.sucess');
+const deleteFail = document.querySelector('.delete.fail');
+
+function alterMessage() {
+    messageDiv.removeAttribute('class', 'disabled');
+    messageDiv.setAttribute('class', 'sucess');
+    statusSucess.removeAttribute('class', 'disabled');
 }

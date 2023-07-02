@@ -4,7 +4,7 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
 })
 
-async function orderPizza() {
+function getOrderData() {
     const selectBorda = document.querySelector('#borda');
     const borda_id = selectBorda.options[selectBorda.selectedIndex].value;
     
@@ -18,19 +18,30 @@ async function orderPizza() {
             sabor_id.push(selectSabores.options[i].value)
         }
     }
+    if(sabor_id.length <= 3) return data = {borda_id,massa_id,sabor_id};
+    return false;
     
-    const data = {borda_id,massa_id,sabor_id};
+}
 
-    const insertData = JSON.stringify(data);
+async function orderPizza() {
+    
+    const data = getOrderData();
+    if(data) {
+        const insertData = JSON.stringify(data);
 
-    console.log(insertData);
+        console.log(insertData);
 
-    const response = await fetch("http://localhost:3000/order", {
-        method: "POST",
-        body: insertData,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
+        const response = await fetch("http://localhost:3000/order", {
+            method: "POST",
+            body: insertData,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+    } else {
+        alert('Apenas até 3 sabores');
+    }
+    
 
 }

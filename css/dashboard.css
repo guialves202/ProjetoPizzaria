@@ -25,12 +25,36 @@
 
 #content {
     display: block;
-    padding-top: 7vh;
-    padding-bottom: 16vh;
+    padding-bottom: 25vh;
 }
 
 #content h1 {
+    padding-top: 7vh;
     text-align: center;
+}
+
+#message-div {
+    text-align: center;
+    border: 2px solid black;
+    padding: 5px;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.disabled {
+    display: none !important;
+}
+
+.sucess {
+    background-color: rgb(162, 255, 162);
+    color: rgb(0, 70, 0);
+}
+
+.fail {
+    background-color: rgb(255, 75, 75);
+    color: rgb(82, 0, 0);
 }
 
 #form {
@@ -101,6 +125,10 @@
 
 .fa-arrows-rotate, .fa-x {
     font-size: 20px;
+}
+
+body {
+    position: relative;
 }
 
 #footer {
