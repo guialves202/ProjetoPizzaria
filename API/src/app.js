@@ -7,12 +7,14 @@ const app = express();
 // indicar para o express ler body em json;
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "*");
-    app.use(cors());
-    next();
-})
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "*");
+//     app.use(cors());
+//     next();
+// })
+
+app.use(cors());
 
 // usar as rotas
 app.use(routes);

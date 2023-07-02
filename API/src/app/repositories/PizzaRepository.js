@@ -2,10 +2,9 @@ import pizzaDB from "../database/connection.js";
 
 class PizzaRepository {
 
-    findAll(pedidoID) {
-        console.log(pedidoID);
-        const sql = 'SELECT pedidos.id AS pedido_id, pizzas.id AS pizza_id, bordas.tipo AS tipo_borda, massas.tipo AS tipo_massa, sabores.tipo AS sabor, status.tipo AS status FROM pedidos INNER JOIN pizzas ON pedidos.pizza_id = pizzas.id INNER JOIN massas ON pizzas.massa_id = massas.id INNER JOIN bordas ON pizzas.borda_id = bordas.id INNER JOIN pizza_sabor ON pizzas.id = pizza_sabor.pizza_id INNER JOIN sabores ON pizza_sabor.sabor_id = sabores.id INNER JOIN status ON pedidos.status_id = status.id WHERE pedidos.id = ?;';
-        return pizzaDB.doQuery(sql,pedidoID,'Pedido não encontrado');
+    findAll() {
+        const sql = 'SELECT pedidos.id AS pedido_id, pizzas.id AS pizza_id, bordas.tipo AS tipo_borda, massas.tipo AS tipo_massa, sabores.tipo AS sabor, status.id AS status FROM pedidos INNER JOIN pizzas ON pedidos.pizza_id = pizzas.id INNER JOIN massas ON pizzas.massa_id = massas.id INNER JOIN bordas ON pizzas.borda_id = bordas.id INNER JOIN pizza_sabor ON pizzas.id = pizza_sabor.pizza_id INNER JOIN sabores ON pizza_sabor.sabor_id = sabores.id INNER JOIN status ON pedidos.status_id = status.id ORDER BY pedidos.id DESC;';
+        return pizzaDB.doQuery(sql,'Pedido não encontrado');
     }
 
     async create(content) {
@@ -58,13 +57,13 @@ class PizzaRepository {
         const pizzaCriada = await salvaPizza();
         await salvaSabores(await pizzaCriada);
         const pedidoID = await salvaPedido(await pizzaCriada);
-
+        this.findAll(await pedidoID);
         return await pedidoID;
 
     }
 
     update() {
-
+        return;
     }
 
     delete() {

@@ -2,8 +2,15 @@ import PizzaRepository from "../repositories/PizzaRepository.js";
 
 class PizzaController {
 
-    async index(pedidoID) {
-        const content = await PizzaRepository.findAll(pedidoID);
+    async index(req,res) {
+        const content = await PizzaRepository.findAll();
+        const row = content[0];
+        for(let i = 1; i < content.length; i++) {
+            if(content[i].pizza_id == row.pizza_id) {
+                row.sabor += ',' + content[i].sabor;
+            }
+        }
+        res.json(row);
     }
 
     async store(req,res) {
@@ -12,10 +19,12 @@ class PizzaController {
 
         const content = await PizzaRepository.create(bodyContent);
         res.json(content);
-        console.log(this?.index);
     }
 
     async update(req,res) {
+        const body = req.body;
+        console.log(body);
+
         const content = await PizzaRepository.update();
         res.json(content);
     }

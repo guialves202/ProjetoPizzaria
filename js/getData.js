@@ -1,83 +1,136 @@
+const table = document.querySelector('#form-table');
+
 async function getOrders() {
-    const response = await fetch('http://localhost:3000/orders')
+    return (await fetch('http://localhost:3000/orders')).json()
+}
+
+function createNode(elementType, type = '', content = '') {
+    const element = document.createElement(elementType);
+    if(type && content) addAttribute(element, type, content);
+    return element;
+}
+
+function addAttribute(element, type, content) {
+    element.setAttribute(type, content);
+}
+
+function append(parent, element) {
+    parent.appendChild(element);
+}
+
+function createSelect() {
+    const select = createNode('select');
+
+    const option1 = createNode('option');
+    option1.value = 1;
+    option1.text = 'Em Produção';
+
+    const option2 = createNode('option');
+    option2.value = 2;
+    option2.text = 'Em Entrega';
+
+    const option3 = createNode('option');
+    option3.value = 3;
+    option3.text = 'Concluído';
+
+    append(select, option1);
+    append(select, option2);
+    append(select, option3);
+
+    return select;
+}
+
+function createButton(className, event) {
+    const button = createNode('button');
+
+    button.addEventListener('click', event);
+
+    const span = createNode('span');
+    const i = createNode('i', 'class', className);
+
+    append(span, i);
+    append(button, span);
+
+    return button;
+}
+
+const tr = createNode('tr');
+tr.setAttribute('class','row content-row');
+
+async function insertData() {
+    const data = await getOrders();
+    for(key in data) {
+        switch (key) {
+            case 'pedido_id':
+                const td1 = createNode('td', 'class', 'column1 column1-rows');
+                td1.textContent = data[key];
+                append(tr, td1);
+                break;
+
+            case 'tipo_borda':
+                const td2 = createNode('td', 'class', 'column2 column2-rows');
+                td2.textContent = data[key];
+                append(tr, td2);
+                break;
+
+            case 'tipo_massa':
+                const td3 = createNode('td', 'class', 'column3 column3-rows');
+                td3.textContent = data[key];
+                append(tr, td3);
+                break;
+            
+            case 'sabor':
+                const td4 = createNode('td', 'class', 'column4 column4-rows');
+                const sabores = data[key].split(',');
+                const ul = createNode('ul');
+                for(let i = 0; i < sabores.length; i++) {
+                    const li = createNode('li');
+                    li.textContent = sabores[i]
+                    append(ul, li);
+                }
+                append(td4, ul);
+                append(tr, td4);
+                break;
+
+            case 'status':
+                const td5 = createNode('td', 'class', 'column5 column5-rows');
+                const select = createSelect();
+                const button = createButton('fa-solid fa-arrows-rotate', updateStatus);
+                append(td5, select);
+                append(td5, button);
+                append(tr, td5)
+                break;
+        }
+    }
+
+    const td6 = createNode('td', 'class', 'column6 column6-rows');
+    const button = createButton('fa-solid fa-x');
+    append(td6, button);
+    append(tr, td6);
+    append(table,tr);
 
 }
 
+insertData();
 
-const table = document.querySelector('#form-table');
-const tr = document.createElement('tr');
-tr.setAttribute('class','row content-row');
+async function updateStatus(event) {
 
-const td1 = document.createElement('td');
-const td2 = document.createElement('td');
-const td3 = document.createElement('td');
-const td4 = document.createElement('td');
-const td5 = document.createElement('td');
-const td6 = document.createElement('td');
+    event.preventDefault();
+    
+    const td = this.parentNode;
+    const select = td.getElementsByTagName('select')[0];
 
-td1.textContent = '10';
+    const tr = td.parentNode;
+    const pedido = tr.querySelector('.column1');
 
-td1.setAttribute('class','column1 column1-rows');
-td2.setAttribute('class','column2 column2-rows');
-td3.setAttribute('class','column3 column3-rows');
-td4.setAttribute('class','column4 column4-rows');
-td5.setAttribute('class','column5 column5-rows');
-td6.setAttribute('class','column6 column6-rows');
+    const insertData = [select.value, pedido.textContent];
+    console.log(insertData);
 
-const ul = document.createElement('ul');
-const li1 = document.createElement('li');
-li1.textContent = 'Frango com Catupiry'
-
-const select = document.createElement('select');
-const option1 = document.createElement('option');
-option1.value = 'Concluído';
-
-const option2 = document.createElement('option');
-option2.value = 'teste';
-const option3 = document.createElement('option');
-
-const button1 = document.createElement('button');
-button1.setAttribute('type','submit');
-
-const span1 = document.createElement('span');
-const i1 = document.createElement('i');
-i1.setAttribute('class','fa-solid fa-arrows-rotate');
-
-const button2 = document.createElement('button');
-button2.setAttribute('type','submit');
-
-const span2 = document.createElement('span');
-const i2 = document.createElement('i');
-i2.setAttribute('class','fa-solid fa-x');
-
-span2.appendChild(i2);
-button2.appendChild(span2);
-td6.appendChild(button2);
-
-span1.appendChild(i1);
-button1.appendChild(span1);
-select.appendChild(option1);
-select.appendChild(option2);
-select.appendChild(option3);
-
-td5.appendChild(select);
-td5.appendChild(button1);
-
-ul.appendChild(li1);
-td4.appendChild(ul);
-
-tr.appendChild(td1);
-tr.appendChild(td2);
-tr.appendChild(td3);
-tr.appendChild(td4);
-tr.appendChild(td5);
-tr.appendChild(td6);
-table.appendChild(tr);
-
-// async function testeAPI() {
-//     const response = await fetch('http://localhost:3000/orders');
-//     const data = await response.json();
-//     data.map((content) => {
-//         pedidoRows[pedidoRows.length-1].textContent += Object.values(content);
-//     })
-// }
+    const response = await fetch("http://localhost:3000/order", {
+        method: "PUT",
+        body: insertData,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+}

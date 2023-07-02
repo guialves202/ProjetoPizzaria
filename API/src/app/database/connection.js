@@ -1,4 +1,3 @@
-import { json } from 'express';
 import mysql from 'mysql2';
 
 class DataBase {
