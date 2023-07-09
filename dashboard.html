@@ -11,10 +11,12 @@
     <script src="https://kit.fontawesome.com/4eb57e4054.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
     <nav id="nav">
         <a href="#"><img src="./img/92d75abef1c7523630339a2793eba5eb-fatia-de-traa-o-de-cor-de-pizza.png" alt="pizza"></a>
         <h1>Peça sua pizza</h1>
     </nav>
+
     <div id="content">
         <div id="message-div" class="sucess disabled">
             <h2 class="message status sucess disabled">Status alterado com sucesso!</h2>
@@ -22,7 +24,158 @@
             <h2 class="message delete fail disabled">Falha ao remover o pedido</h2>
             <h2 class="message status fail disabled">Falha ao alterar o status</h2>
         </div>
+
         <h1>Gerenciar pedidos:</h1>
+
+        <div id="filter-line">
+
+            <button id="filter-btn"><a href="#pop-up-filter-div">Filtros</a></button>
+            <form id="sort-form">
+                <label for="ordenar">Ordenar por:</label>
+                <select name="ordenar" id="ordenar">
+                    <option value="1">Mais recente</option>
+                    <option value="2">Mais antigo</option>
+                </select>
+                <label for="limit">Exibir:</label>
+                <select name="limit" id="limit">
+                    <option value="0">Todos</option>
+                    <option value="10">10 Pedidos</option>
+                    <option value="20">20 Pedidos</option>
+                    <option value="30">30 Pedidos</option>
+                </select>
+            </form>
+            
+
+        </div>
+
+        <div id="pop-up-filter-div">
+            <div id="filter-div">
+
+                <a href="#close" title="Close" class="close">X</a>
+                <form id="filter-form">
+
+                    <div id="pedido-filter-div">
+                        <p>Filtrar por número do pedido:</p>
+                        <input type="text" id="pedido-filter" placeholder="Número do pedido">
+                    </div>
+                    
+                    <div id="borda-filter-div">
+                        <p>Filtrar por borda:</p>
+                        
+                        <label for="cheddar">
+                            <input type="checkbox" name="cheddar" value="1" id="cheddar">
+                            Cheddar
+                        </label>
+                        
+                        <label for="catupiry">
+                            <input type="checkbox" name="catupiry" value="2" id="catupiry">
+                            Catupiry
+                        </label>
+
+                        
+                    </div>
+
+                    <div id="massa-filter-div">
+                        <p>Filtrar por massa:</p>
+                        
+                        <label for="comum">
+                            <input type="checkbox" name="comum" value="1" id="comum">
+                            Comum
+                        </label>
+                        
+                        <label for="integral">
+                            <input type="checkbox" name="integral" value="2" id="integral">
+                            Integral
+                        </label>
+                        
+                        <label for="temperada">
+                            <input type="checkbox" name="temperada" value="3" id="temperada">
+                            Temperada
+                        </label>
+                    </div>
+
+                    <div id="sabor-filter-div">
+                        <p>Filtrar por sabor:</p>
+                        
+                        <label for="4queijos">
+                            <input type="checkbox" name="4queijos" value="1" id="4queijos">
+                            4 Queijos
+                        </label>
+                        
+                        <label for="frangocatupiry">
+                            <input type="checkbox" name="frangocatupiry" value="2" id="frangocatupiry">
+                            Frango com Catupiry
+                        </label>
+                        
+                        <label for="calabresa">
+                            <input type="checkbox" name="calabresa" value="3" id="calabresa">
+                            Calabresa
+                        </label>
+                        
+                        <label for="lombinho">
+                            <input type="checkbox" name="lombinho" value="4" id="lombinho">
+                            Lombinho
+                        </label>
+                        
+                        <label for="filecheddar">
+                            <input type="checkbox" name="filecheddar" value="5" id="filecheddar">
+                            Filé com Cheddar
+                        </label>
+                        
+                        <label for="portuguesa">
+                            <input type="checkbox" name="portuguesa" value="6" id="portuguesa">
+                            Portuguesa
+                        </label>
+                        
+                        <label for="margherita">
+                            <input type="checkbox" name="margherita" value="7" id="margherita">
+                            Margherita
+                        </label>
+                    </div>
+
+                    <div id="qnt-sabor-filter-div">
+                        <p>Filtrar por quantidade de sabores:</p>
+
+                        <label for="um">
+                            <input type="checkbox" name="um" id="um">
+                            1
+                        </label>
+
+                        <label for="dois">
+                            <input type="checkbox" name="dois" id="dois">
+                            2
+                        </label>
+
+                        <label for="tres">
+                            <input type="checkbox" name="tres" id="tres">
+                            3
+                        </label>
+
+                    </div>
+
+                    <div id="status-filter-div">
+                        <p>Filtrar por status do pedido:</p>
+                        
+                        <label for="producao">
+                            <input type="checkbox" name="producao" value="1" id="producao">
+                            Em produção
+                        </label>
+                        <label for="entrega">
+                            <input type="checkbox" name="entrega" value="2" id="entrega">
+                            Em entrega
+                        </label>
+                        
+                        <label for="concluido">
+                            <input type="checkbox" name="concluido" value="3" id="concluido">
+                            Concluído
+                        </label>
+                    </div>
+                    
+                </form>
+
+            </div>
+        </div>
+
         <form id="form">
             <table id="form-table">
                 <tr class="row first-row">
@@ -34,7 +187,8 @@
                     <th class="column6 column6-title">Ações</th>
                 </tr>
             </table>
-        </form>   
+        </form>
+    </div>
     <div id="footer">
         <h1>Pizzaria do João 2023</h1>
     </div>
