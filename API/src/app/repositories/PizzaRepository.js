@@ -14,51 +14,36 @@ class PizzaRepository {
             massa_id: content.massa_id
         }
 
-        function salvaPizza() {
-            return new Promise((resolve,reject) => {
-                pizzaDB.connection.query('INSERT INTO pizzas SET ?', pizza, (err,resultado) => {
-                    if(err) return reject(err);
-                    const jsonResult = JSON.parse(JSON.stringify(resultado));
-                    return resolve(jsonResult.insertId);
-                })
-            })
+        function createSQL(table) {
+            return `INSERT INTO ${table} SET ?`
         }
 
-        function salvaSabores(pizzaID) {
-            return new Promise((resolve,reject) => {
-                for(let i = 0; i < content.sabor_id.length; i++) {
-                    const pizzaSabor = {
-                        pizza_id: pizzaID,
-                        sabor_id: content.sabor_id[i]
-                    }
-                    pizzaDB.connection.query('INSERT INTO pizza_sabor SET ?', pizzaSabor, (err,resultado) => {
-                        if(err) return reject(err);
-                        const jsonResult = JSON.parse(JSON.stringify(resultado));
-                        return resolve(jsonResult);
-                    })
-                }
-            })
+        const insertSQL = {
+            pizzas: createSQL('pizzas'),
+            pizza_sabor: createSQL('pizza_sabor'),
+            pedidos: createSQL('pedidos')
         }
 
-        function salvaPedido(pizzaID) {
-            return new Promise((resolve,reject) => {
-                const pedido = {
-                    pizza_id: pizzaID,
-                    status_id: 1
-                }
-                pizzaDB.connection.query('INSERT INTO pedidos SET ?', pedido, (err, resultado) => {
-                    if(err) return reject(err);
-                    const jsonResult = JSON.parse(JSON.stringify(resultado));
-                    return resolve(jsonResult.insertId);
-                })
-            })
+        const insertedPizza = await pizzaDB.doQuery(insertSQL.pizzas, pizza, 'Não foi possível salvar a pizza');
+
+        const pizzaID = insertedPizza.insertId;
+
+        for(let i = 0; i < content.sabor_id.length; i++) {
+            const pizzaSabor = {
+                pizza_id: pizzaID,
+                sabor_id: content.sabor_id[i]
+            }
+            pizzaDB.doQuery(insertSQL.pizza_sabor, pizzaSabor, 'Não foi possível salvar o sabor');
         }
 
-        const pizzaCriada = await salvaPizza();
-        await salvaSabores(await pizzaCriada);
-        const pedidoID = await salvaPedido(await pizzaCriada);
-        this.findAll(await pedidoID);
-        return await pedidoID;
+        const pedido = {
+            pizza_id: pizzaID,
+            status_id: 1
+        }
+
+        const insertedPedido = await pizzaDB.doQuery(insertSQL.pedidos, pedido, 'Não foi possível salvar o pedido');
+
+        return insertedPedido.insertId;
 
     }
 
@@ -74,30 +59,11 @@ class PizzaRepository {
 
         const sql = 'SELECT pizzas.id FROM pizzas INNER JOIN pedidos ON pedidos.pizza_id = pizzas.id WHERE pedidos.id = ?';
 
-        function findPizza() {
-            return new Promise((resolve,reject) => {
-                pizzaDB.connection.query(sql, pedidoID, (err, resultado) => {
-                    if(err) return reject(err);
-                    const jsonResult = JSON.parse(JSON.stringify(resultado[0]));
-                    return resolve(jsonResult);
-                })
-            })
-        }
-        
-        function deletaDado(sql, pizzaID) {
-            return new Promise((resolve,reject) => {
-                pizzaDB.connection.query(sql, pizzaID, (err, resultado) => {
-                    if(err) return reject(err);
-                    const jsonResult = JSON.parse(JSON.stringify(resultado));
-                    return resolve(jsonResult);
-                })
-            })
-        }
+        const pizza = await pizzaDB.doQuery(sql, pedidoID, 'Não foi possível encontrar a pizza');
 
-        const pizzaID = await findPizza();
-        deletaDado('DELETE FROM pedidos WHERE pizza_id = ?', await pizzaID.id);
-        deletaDado('DELETE FROM pizza_sabor WHERE pizza_id = ?', await pizzaID.id);
-        deletaDado('DELETE FROM pizzas WHERE id = ?', await pizzaID.id);
+        pizzaDB.doQuery('DELETE FROM pedidos WHERE pizza_id = ?', pizza[0].id, 'Não foi possível deletar o pedido');
+        pizzaDB.doQuery('DELETE FROM pizza_sabor WHERE pizza_id = ?', pizza[0].id, 'Não foi possível deletar o sabor');
+        pizzaDB.doQuery('DELETE FROM pizzas WHERE id = ?', pizza[0].id, 'Não foi possível deletar a pizza');
         
     }
 
