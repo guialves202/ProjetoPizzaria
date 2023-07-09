@@ -40,6 +40,9 @@ class PizzaController {
         const bodyContent = JSON.parse(JSON.stringify(body));
 
         const content = await PizzaRepository.create(bodyContent);
+        
+        console.log(teste);
+
         res.json(content);
     }
 
