@@ -33,8 +33,8 @@
             <form id="sort-form">
                 <label for="ordenar">Ordenar por:</label>
                 <select name="ordenar" id="ordenar">
-                    <option value="1">Mais recente</option>
-                    <option value="2">Mais antigo</option>
+                    <option value="1">Mais antigo</option>
+                    <option value="2">Mais recente</option>
                 </select>
                 <label for="limit">Exibir:</label>
                 <select name="limit" id="limit">
@@ -63,12 +63,12 @@
                         <p>Filtrar por borda:</p>
                         
                         <label for="cheddar">
-                            <input type="checkbox" name="cheddar" value="1" id="cheddar">
+                            <input type="checkbox" name="cheddar" value="01" id="cheddar">
                             Cheddar
                         </label>
                         
                         <label for="catupiry">
-                            <input type="checkbox" name="catupiry" value="2" id="catupiry">
+                            <input type="checkbox" name="catupiry" value="02" id="catupiry">
                             Catupiry
                         </label>
 
@@ -79,17 +79,17 @@
                         <p>Filtrar por massa:</p>
                         
                         <label for="comum">
-                            <input type="checkbox" name="comum" value="1" id="comum">
+                            <input type="checkbox" name="comum" value="11" id="comum">
                             Comum
                         </label>
                         
                         <label for="integral">
-                            <input type="checkbox" name="integral" value="2" id="integral">
+                            <input type="checkbox" name="integral" value="12" id="integral">
                             Integral
                         </label>
                         
                         <label for="temperada">
-                            <input type="checkbox" name="temperada" value="3" id="temperada">
+                            <input type="checkbox" name="temperada" value="13" id="temperada">
                             Temperada
                         </label>
                     </div>
@@ -98,37 +98,37 @@
                         <p>Filtrar por sabor:</p>
                         
                         <label for="4queijos">
-                            <input type="checkbox" name="4queijos" value="1" id="4queijos">
+                            <input type="checkbox" name="4queijos" value="21" id="4queijos">
                             4 Queijos
                         </label>
                         
                         <label for="frangocatupiry">
-                            <input type="checkbox" name="frangocatupiry" value="2" id="frangocatupiry">
+                            <input type="checkbox" name="frangocatupiry" value="22" id="frangocatupiry">
                             Frango com Catupiry
                         </label>
                         
                         <label for="calabresa">
-                            <input type="checkbox" name="calabresa" value="3" id="calabresa">
+                            <input type="checkbox" name="calabresa" value="23" id="calabresa">
                             Calabresa
                         </label>
                         
                         <label for="lombinho">
-                            <input type="checkbox" name="lombinho" value="4" id="lombinho">
+                            <input type="checkbox" name="lombinho" value="24" id="lombinho">
                             Lombinho
                         </label>
                         
                         <label for="filecheddar">
-                            <input type="checkbox" name="filecheddar" value="5" id="filecheddar">
+                            <input type="checkbox" name="filecheddar" value="25" id="filecheddar">
                             Filé com Cheddar
                         </label>
                         
                         <label for="portuguesa">
-                            <input type="checkbox" name="portuguesa" value="6" id="portuguesa">
+                            <input type="checkbox" name="portuguesa" value="26" id="portuguesa">
                             Portuguesa
                         </label>
                         
                         <label for="margherita">
-                            <input type="checkbox" name="margherita" value="7" id="margherita">
+                            <input type="checkbox" name="margherita" value="27" id="margherita">
                             Margherita
                         </label>
                     </div>
@@ -137,17 +137,17 @@
                         <p>Filtrar por quantidade de sabores:</p>
 
                         <label for="um">
-                            <input type="checkbox" name="um" id="um">
+                            <input type="checkbox" name="um" id="um" value="31">
                             1
                         </label>
 
                         <label for="dois">
-                            <input type="checkbox" name="dois" id="dois">
+                            <input type="checkbox" name="dois" id="dois" value="32">
                             2
                         </label>
 
                         <label for="tres">
-                            <input type="checkbox" name="tres" id="tres">
+                            <input type="checkbox" name="tres" id="tres" value="33">
                             3
                         </label>
 
@@ -157,18 +157,25 @@
                         <p>Filtrar por status do pedido:</p>
                         
                         <label for="producao">
-                            <input type="checkbox" name="producao" value="1" id="producao">
+                            <input type="checkbox" name="producao" value="41" id="producao">
                             Em produção
                         </label>
                         <label for="entrega">
-                            <input type="checkbox" name="entrega" value="2" id="entrega">
+                            <input type="checkbox" name="entrega" value="42" id="entrega">
                             Em entrega
                         </label>
                         
                         <label for="concluido">
-                            <input type="checkbox" name="concluido" value="3" id="concluido">
+                            <input type="checkbox" name="concluido" value="43" id="concluido">
                             Concluído
                         </label>
+                    </div>
+
+                    <div></div>
+                    <div></div>
+
+                    <div id="submit-filter">
+                        <button type="submit" onclick="getFilterData(event)">Filtrar</button>
                     </div>
                     
                 </form>

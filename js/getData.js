@@ -1,6 +1,83 @@
-async function getOrders() {
-    return (await fetch('http://localhost:3000/orders')).json();
+function getFilterData(event) {
+    event.preventDefault();
+    const filters = {};
+    const bordas = [];
+    const massas = [];
+    const sabores = [];
+    const qntSabores = [];
+    const status = [];
+    const pedidoID = document.querySelector('#pedido-filter').value;
+    if(pedidoID) {
+        filters.pedido_id = pedidoID;
+    }
+    const inputs = document.querySelectorAll("#filter-form input[type='checkbox']");
+    inputs.forEach((item) => {
+        if(item.checked) {
+            switch(item.value[0]){
+                case '0':
+                    bordas.push(item.value[1]);
+                    break;
+                case '1':
+                    massas.push(item.value[1]);
+                    break;
+                case '2':
+                    sabores.push(item.value[1]);
+                    break;
+                case '3':
+                    qntSabores.push(item.value[1]);
+                    break;
+                case '4':
+                    status.push(item.value[1]);
+                    break;
+                            
+            }
+        }
+    })
+    switch(true) {
+        case bordas.length > 0:
+            filters.borda_id = bordas;
+            break;
+        case massas.length > 0:
+            filters.massa_id = massas;
+            break;
+        case sabores.length > 0:
+            filters.sabor_id = sabores;
+            break;
+        case qntSabores.length > 0:
+            filters.qntSabor = qntSabores;
+            break;
+        case status.length > 0:
+            filters.status = status;
+            break;
+    }
+    getOrders(filters);
 }
+
+
+
+async function getOrders(filters) {
+    if(filters) {
+        const response = await fetch('http://localhost:3000/orders', {
+            method: 'POST',
+            body: JSON.stringify(filters),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        showRows(await response.json());
+    } else {
+        const response = await fetch('http://localhost:3000/orders', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        showRows(await response.json());
+    }
+    
+}
+
+getOrders();
 
 
 function createNode(elementType, type = '', content = '') {
@@ -55,10 +132,9 @@ function createButton(className, event) {
     return button;
 }
 
-async function showRows() {
-    
+async function showRows(data) {
     const table = document.querySelector('#form-table');
-    const data = await getOrders();
+    table.innerHTML = '';
     data.forEach(obj => {
         const tr = createNode('tr','class','row content-row');
         for(const key in obj) {
@@ -111,11 +187,11 @@ async function showRows() {
         append(table,tr);
     });
     
-    
+    const close = document.querySelector('.close');
+    close.click();
 
 }
 
-showRows();
 
 async function updateStatus(event) {
 

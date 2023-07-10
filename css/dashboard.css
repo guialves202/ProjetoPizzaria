@@ -75,6 +75,29 @@ body {
     border: 1px solid rgba(44, 44, 44, 0.5);
 }
 
+#submit-filter button {
+    padding: 5px;
+    width: 10vh;
+    background-color: rgb(255, 101, 0);
+    padding: 5px 10px 5px 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(44, 44, 44, 0.5);
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    transition: background-color 0.2s ease-in;
+    cursor: pointer;
+}
+
+#submit-filter button:hover {
+    background-color: #c94913;
+}
+
+#submit-filter {
+    display: flex;
+    align-items: end;
+}
+
 option {
     font-size: 14px;
 }
@@ -163,7 +186,7 @@ select {
     grid-template-columns: auto auto auto;
     justify-content: space-between;
     row-gap: 5vh;
-    padding: 10vh 10vh 0 10vh;
+    padding: 5vh 10vh 10vh 10vh;
 }
 
 #filter-form div {

@@ -3,7 +3,7 @@ import PizzaRepository from "../repositories/PizzaRepository.js";
 class PizzaController {
 
     async index(req,res) {
-        const content = await PizzaRepository.findAll();
+        const content = await PizzaRepository.findAll(req.body);
         
         const objIDs = [];
 
