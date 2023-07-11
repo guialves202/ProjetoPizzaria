@@ -1,3 +1,10 @@
+const limitSelect = document.querySelector('#limit');
+const orderSelect = document.querySelector('#ordenar');
+
+orderSelect.addEventListener('change', () => {
+    getOrders({order_by: orderSelect.options[orderSelect.selectedIndex].value})
+})
+
 function getFilterData(event) {
     event.preventDefault();
     const filters = {};
@@ -50,10 +57,13 @@ function getFilterData(event) {
             filters.status = status;
             break;
     }
+    
+    
+    // filters.order_by = orderSelect.options[orderSelect.selectedIndex].value;
+    // filters.limit = limitSelect.options[limitSelect.selectedIndex].value;
+    console.log('filters: ', filters);
     getOrders(filters);
 }
-
-
 
 async function getOrders(filters) {
     if(filters) {
