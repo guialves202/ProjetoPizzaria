@@ -58,9 +58,6 @@ function getFilterData(event) {
             break;
     }
     
-    
-    // filters.order_by = orderSelect.options[orderSelect.selectedIndex].value;
-    // filters.limit = limitSelect.options[limitSelect.selectedIndex].value;
     createFilter(filters);
 }
 
@@ -147,7 +144,6 @@ function createButton(className, event) {
 }
 
 async function showRows(data) {
-    console.log(data);
     const table = document.querySelector('#form-table');
     table.innerHTML = '';
     data.forEach(obj => {

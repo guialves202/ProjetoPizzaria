@@ -94,6 +94,23 @@ class PizzaController {
                             }
                         }
                         break;
+                    case 'order_by':
+                        // 1 - mais antigo
+                        // 2 - mais recente
+                        switch(filters[key]) {
+                            case '1':
+                                console.log(newRows);
+                                for(const pizza in newRows) {
+                                    console.log(pizza);
+                                }
+                                break;
+                            case '2':
+                                console.log('caso 2');
+                                break;
+                            default:
+                                console.log('nada');
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -127,6 +144,11 @@ class PizzaController {
         const body = req.body;
 
         const content = await PizzaRepository.delete(body.pedido_id);
+        res.json(content);
+    }
+
+    async statistic(req, res) {
+        const content = await PizzaRepository.statistic();
         res.json(content);
     }
 
