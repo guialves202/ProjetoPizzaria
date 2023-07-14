@@ -2,7 +2,7 @@ const limitSelect = document.querySelector('#limit');
 const orderSelect = document.querySelector('#ordenar');
 
 orderSelect.addEventListener('change', () => {
-    getOrders({order_by: orderSelect.options[orderSelect.selectedIndex].value})
+    createFilter({order_by: orderSelect.options[orderSelect.selectedIndex].value})
 })
 
 function getFilterData(event) {
@@ -22,19 +22,19 @@ function getFilterData(event) {
         if(item.checked) {
             switch(item.value[0]){
                 case '0':
-                    bordas.push(item.value[1]);
+                    bordas.push(item.value.substring(1,item.value.length));
                     break;
                 case '1':
-                    massas.push(item.value[1]);
+                    massas.push(item.value.substring(1,item.value.length));
                     break;
                 case '2':
-                    sabores.push(item.value[1]);
+                    sabores.push(item.value.substring(1,item.value.length));
                     break;
                 case '3':
-                    qntSabores.push(item.value[1]);
+                    qntSabores.push(item.value.substring(1,item.value.length));
                     break;
                 case '4':
-                    status.push(item.value[1]);
+                    status.push(item.value.substring(1,item.value.length));
                     break;
                             
             }
@@ -61,8 +61,12 @@ function getFilterData(event) {
     
     // filters.order_by = orderSelect.options[orderSelect.selectedIndex].value;
     // filters.limit = limitSelect.options[limitSelect.selectedIndex].value;
-    console.log('filters: ', filters);
-    getOrders(filters);
+    createFilter(filters);
+}
+
+function createFilter(filters) {
+    const filter = filters;
+    getOrders(filter);
 }
 
 async function getOrders(filters) {
@@ -143,6 +147,7 @@ function createButton(className, event) {
 }
 
 async function showRows(data) {
+    console.log(data);
     const table = document.querySelector('#form-table');
     table.innerHTML = '';
     data.forEach(obj => {

@@ -3,8 +3,9 @@ import PizzaRepository from "../repositories/PizzaRepository.js";
 class PizzaController {
 
     async index(req,res) {
-        const content = await PizzaRepository.findAll(req.body);
-        
+        const filters = req.body;
+        let newRows = [];
+        const content = await PizzaRepository.findAll();
         const objIDs = [];
 
         content.map(obj => {
@@ -31,8 +32,79 @@ class PizzaController {
                 }
             })
         }
+        if(filters) {
+            for(const key in filters) {
+                switch(key) {
+                    case 'pedido_id':
+                        if(filters[key].length > 0) {
+                            newRows = newRows.concat(rows.filter(pizza => pizza.pedido_id == filters[key]))
+                        }
+                        break;
+                    case 'borda_id':
+                        if(filters[key].length > 0) {
+                            for(let i = 0; i < filters[key].length; i++) {
+                                newRows = newRows.concat(rows.filter(pizza => {
+                                    if(pizza.tipo_borda === filters[key][i] && !newRows.includes(pizza)) {
+                                        return true;
+                                    };
+                                }))
+                            }
+                        }
+                        break;
+                    case 'massa_id':
+                        if(filters[key].length > 0) {
+                            for(let i = 0; i < filters[key].length; i++) {
+                                newRows = newRows.concat(rows.filter(pizza => {
+                                    if(pizza.tipo_massa === filters[key][i] && !newRows.includes(pizza)) {
+                                        return true;
+                                    };
+                                }))
+                            }
+                        }
+                        break;
+                    case 'sabor_id':
+                        if(filters[key].length > 0) {
+                            for(let i = 0; i < filters[key].length; i++) {
+                                newRows = newRows.concat(rows.filter(pizza => {
+                                    if(pizza.sabor.includes(filters[key][i]) && !newRows.includes(pizza)) {
+                                        return true;
+                                    };
+                                }))
+                            }
+                        }
+                        break;
+                    case 'qntSabor':
+                        if(filters[key].length > 0) {
+                            for(let i = 0; i < filters[key].length; i++) {
+                                newRows = newRows.concat(rows.filter(pizza => {
+                                    const qntSabor = pizza.sabor.split(',').length;
+                                    return qntSabor == filters[key][i] && !newRows.includes(pizza);
+                                }))
+                            }
+                        }
+                        break;
+                    case 'status':
+                        if(filters[key].length > 0) {
+                            for(let i = 0; i < filters[key].length; i++) {
+                                newRows = newRows.concat(rows.filter(pizza => {
+                                    if(pizza.status == filters[key][i] && !newRows.includes(pizza)) {
+                                        return true;
+                                    };
+                                }))
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        if(newRows.length > 0) {
+            res.json(newRows);
+        } else {
+            res.json(rows);
+        }
         
-        res.json(rows);
     }
 
     async store(req,res) {
