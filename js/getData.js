@@ -5,6 +5,10 @@ orderSelect.addEventListener('change', () => {
     createFilter({order_by: orderSelect.options[orderSelect.selectedIndex].value})
 })
 
+limitSelect.addEventListener('change', () => {
+    createFilter({limit: limitSelect.options[limitSelect.selectedIndex].value})
+})
+
 function getFilterData(event) {
     event.preventDefault();
     const filters = {};
@@ -42,13 +46,13 @@ function getFilterData(event) {
     })
     switch(true) {
         case bordas.length > 0:
-            filters.borda_id = bordas;
+            filters.tipo_borda = bordas;
             break;
         case massas.length > 0:
-            filters.massa_id = massas;
+            filters.tipo_massa = massas;
             break;
         case sabores.length > 0:
-            filters.sabor_id = sabores;
+            filters.sabor = sabores;
             break;
         case qntSabores.length > 0:
             filters.qntSabor = qntSabores;
@@ -67,8 +71,8 @@ function createFilter(filters) {
 }
 
 async function getOrders(filters) {
-    if(filters) {
-        const response = await fetch('http://localhost:3000/orders', {
+    if(Object.values(filters).length > 0) {
+        const response = await fetch('http://localhost:3000/filterOrders', {
             method: 'POST',
             body: JSON.stringify(filters),
             headers: {
@@ -88,7 +92,7 @@ async function getOrders(filters) {
     
 }
 
-getOrders();
+getOrders({});
 
 
 function createNode(elementType, type = '', content = '') {

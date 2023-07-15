@@ -4,7 +4,6 @@ class PizzaController {
 
     async index(req,res) {
         const filters = req.body;
-        let newRows = [];
         const content = await PizzaRepository.findAll();
         const objIDs = [];
 
@@ -32,94 +31,12 @@ class PizzaController {
                 }
             })
         }
-        if(filters) {
-            for(const key in filters) {
-                switch(key) {
-                    case 'pedido_id':
-                        if(filters[key].length > 0) {
-                            newRows = newRows.concat(rows.filter(pizza => pizza.pedido_id == filters[key]))
-                        }
-                        break;
-                    case 'borda_id':
-                        if(filters[key].length > 0) {
-                            for(let i = 0; i < filters[key].length; i++) {
-                                newRows = newRows.concat(rows.filter(pizza => {
-                                    if(pizza.tipo_borda === filters[key][i] && !newRows.includes(pizza)) {
-                                        return true;
-                                    };
-                                }))
-                            }
-                        }
-                        break;
-                    case 'massa_id':
-                        if(filters[key].length > 0) {
-                            for(let i = 0; i < filters[key].length; i++) {
-                                newRows = newRows.concat(rows.filter(pizza => {
-                                    if(pizza.tipo_massa === filters[key][i] && !newRows.includes(pizza)) {
-                                        return true;
-                                    };
-                                }))
-                            }
-                        }
-                        break;
-                    case 'sabor_id':
-                        if(filters[key].length > 0) {
-                            for(let i = 0; i < filters[key].length; i++) {
-                                newRows = newRows.concat(rows.filter(pizza => {
-                                    if(pizza.sabor.includes(filters[key][i]) && !newRows.includes(pizza)) {
-                                        return true;
-                                    };
-                                }))
-                            }
-                        }
-                        break;
-                    case 'qntSabor':
-                        if(filters[key].length > 0) {
-                            for(let i = 0; i < filters[key].length; i++) {
-                                newRows = newRows.concat(rows.filter(pizza => {
-                                    const qntSabor = pizza.sabor.split(',').length;
-                                    return qntSabor == filters[key][i] && !newRows.includes(pizza);
-                                }))
-                            }
-                        }
-                        break;
-                    case 'status':
-                        if(filters[key].length > 0) {
-                            for(let i = 0; i < filters[key].length; i++) {
-                                newRows = newRows.concat(rows.filter(pizza => {
-                                    if(pizza.status == filters[key][i] && !newRows.includes(pizza)) {
-                                        return true;
-                                    };
-                                }))
-                            }
-                        }
-                        break;
-                    case 'order_by':
-                        // 1 - mais antigo
-                        // 2 - mais recente
-                        switch(filters[key]) {
-                            case '1':
-                                console.log(newRows);
-                                for(const pizza in newRows) {
-                                    console.log(pizza);
-                                }
-                                break;
-                            case '2':
-                                console.log('caso 2');
-                                break;
-                            default:
-                                console.log('nada');
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        if(newRows.length > 0) {
-            res.json(newRows);
+
+        if(Object.values(filters).length > 0) {
+            return rows;
         } else {
             res.json(rows);
+            return rows;
         }
         
     }
