@@ -12,7 +12,7 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(PizzariaDbContext))]
-    [Migration("20231023001302_init")]
+    [Migration("20231025022552_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -24,36 +24,6 @@ namespace api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ExtraModelPizzaModel", b =>
-                {
-                    b.Property<int>("ExtrasId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PizzasId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ExtrasId", "PizzasId");
-
-                    b.HasIndex("PizzasId");
-
-                    b.ToTable("ExtraModelPizzaModel");
-                });
-
-            modelBuilder.Entity("FlavorModelPizzaModel", b =>
-                {
-                    b.Property<int>("FlavorsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PizzasId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FlavorsId", "PizzasId");
-
-                    b.HasIndex("PizzasId");
-
-                    b.ToTable("FlavorModelPizzaModel");
-                });
 
             modelBuilder.Entity("api.Models.ClientModel", b =>
                 {
@@ -83,6 +53,7 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<int>("OrderId")
+                        .HasMaxLength(15)
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
@@ -196,6 +167,14 @@ namespace api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Extras")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Flavors")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("Notes")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -214,56 +193,22 @@ namespace api.Migrations
                     b.ToTable("Pizzas");
                 });
 
-            modelBuilder.Entity("ExtraModelPizzaModel", b =>
-                {
-                    b.HasOne("api.Models.ExtraModel", null)
-                        .WithMany()
-                        .HasForeignKey("ExtrasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("api.Models.PizzaModel", null)
-                        .WithMany()
-                        .HasForeignKey("PizzasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FlavorModelPizzaModel", b =>
-                {
-                    b.HasOne("api.Models.FlavorModel", null)
-                        .WithMany()
-                        .HasForeignKey("FlavorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("api.Models.PizzaModel", null)
-                        .WithMany()
-                        .HasForeignKey("PizzasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("api.Models.ClientModel", b =>
                 {
-                    b.HasOne("api.Models.OrderModel", "Order")
+                    b.HasOne("api.Models.OrderModel", null)
                         .WithOne("Client")
                         .HasForeignKey("api.Models.ClientModel", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("api.Models.PizzaModel", b =>
                 {
-                    b.HasOne("api.Models.OrderModel", "Order")
+                    b.HasOne("api.Models.OrderModel", null)
                         .WithMany("Pizzas")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("api.Models.OrderModel", b =>

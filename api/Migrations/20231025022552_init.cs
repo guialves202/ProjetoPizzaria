@@ -69,7 +69,7 @@ namespace api.Migrations
                     Complement = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     City = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false)
+                    OrderId = table.Column<int>(type: "int", maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -88,6 +88,8 @@ namespace api.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Flavors = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Extras = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<float>(type: "real", maxLength: 7, nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     OrderId = table.Column<int>(type: "int", nullable: false)
@@ -103,69 +105,11 @@ namespace api.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ExtraModelPizzaModel",
-                columns: table => new
-                {
-                    ExtrasId = table.Column<int>(type: "int", nullable: false),
-                    PizzasId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExtraModelPizzaModel", x => new { x.ExtrasId, x.PizzasId });
-                    table.ForeignKey(
-                        name: "FK_ExtraModelPizzaModel_Extras_ExtrasId",
-                        column: x => x.ExtrasId,
-                        principalTable: "Extras",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ExtraModelPizzaModel_Pizzas_PizzasId",
-                        column: x => x.PizzasId,
-                        principalTable: "Pizzas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FlavorModelPizzaModel",
-                columns: table => new
-                {
-                    FlavorsId = table.Column<int>(type: "int", nullable: false),
-                    PizzasId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FlavorModelPizzaModel", x => new { x.FlavorsId, x.PizzasId });
-                    table.ForeignKey(
-                        name: "FK_FlavorModelPizzaModel_Flavors_FlavorsId",
-                        column: x => x.FlavorsId,
-                        principalTable: "Flavors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FlavorModelPizzaModel_Pizzas_PizzasId",
-                        column: x => x.PizzasId,
-                        principalTable: "Pizzas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_OrderId",
                 table: "Clients",
                 column: "OrderId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ExtraModelPizzaModel_PizzasId",
-                table: "ExtraModelPizzaModel",
-                column: "PizzasId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FlavorModelPizzaModel_PizzasId",
-                table: "FlavorModelPizzaModel",
-                column: "PizzasId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pizzas_OrderId",
@@ -178,12 +122,6 @@ namespace api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Clients");
-
-            migrationBuilder.DropTable(
-                name: "ExtraModelPizzaModel");
-
-            migrationBuilder.DropTable(
-                name: "FlavorModelPizzaModel");
 
             migrationBuilder.DropTable(
                 name: "Extras");

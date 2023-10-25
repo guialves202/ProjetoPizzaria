@@ -5,9 +5,9 @@ namespace api.Repositories.Interfaces
     public interface IFlavorRepository
     {
         Task<List<FlavorModel>> index();
-        Task<FlavorModel> show(string id);
+        Task<FlavorModel> show(int id);
         Task<FlavorModel> store(FlavorModel flavor);
-        Task<FlavorModel> update(FlavorModel flavor, string id);
-        Task<bool> delete(string id);
+        Task<FlavorModel> update(FlavorModel flavor, int id);
+        Task<bool> delete(int id);
     }
 }

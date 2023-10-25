@@ -11,8 +11,8 @@ namespace api.Data.Map
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Price).IsRequired().HasMaxLength(7);
             builder.Property(x => x.Notes).HasMaxLength(255);
-
-            builder.Property(x => x.OrderId).IsRequired();
+            builder.Property(x => x.Flavors).IsRequired().HasMaxLength(255);
+            builder.Property(x => x.Extras);
         }
     }
 }

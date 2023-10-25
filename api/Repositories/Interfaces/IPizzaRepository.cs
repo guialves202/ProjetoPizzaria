@@ -5,9 +5,9 @@ namespace api.Repositories.Interfaces
     public interface IPizzaRepository
     {
         Task<List<PizzaModel>> index();
-        Task<PizzaModel> show(string id);
+        Task<PizzaModel> show(int id);
         Task<PizzaModel> store(PizzaModel pizza);
-        Task<PizzaModel> update(PizzaModel pizza, string id);
-        Task<bool> delete(string id);
+        Task<PizzaModel> update(PizzaModel pizza, int id);
+        Task<bool> delete(int id);
     }
 }

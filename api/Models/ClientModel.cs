@@ -12,9 +12,6 @@ namespace api.Models
         public string? Complement { get; set; }
         public string City { get; set; }
         public string PhoneNumber { get; set; }
-
-        public OrderModel Order { get; set; }
-
         public int OrderId { get; set; }
     }
 }

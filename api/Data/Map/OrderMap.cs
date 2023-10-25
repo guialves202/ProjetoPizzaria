@@ -12,7 +12,6 @@ namespace api.Data.Map
             builder.Property(x => x.Price).IsRequired().HasMaxLength(7);
             builder.Property(x => x.PaymentMethod).IsRequired().HasMaxLength(255);
             builder.Property(x => x.CreatedAt).IsRequired().HasMaxLength(50);
-
         }
     }
 }

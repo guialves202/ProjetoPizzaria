@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace api.Models
+﻿namespace api.Models
 {
     public class OrderModel
     {
         public int Id { get; set; }
         public ClientModel Client { get; set; }
-        public List<PizzaModel> Pizzas { get; set; }
+        public ICollection<PizzaModel> Pizzas { get; set; } = new List<PizzaModel>();
         public float Price { get; set; }
         public string PaymentMethod { get; set; }
 

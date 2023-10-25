@@ -17,8 +17,7 @@ namespace api.Data.Map
             builder.Property(x => x.City).IsRequired().HasMaxLength(200);
             builder.Property(x => x.PhoneNumber).IsRequired().HasMaxLength(15);
 
-            builder.Property(x => x.OrderId);
-
+            builder.Property(x => x.OrderId).IsRequired().HasMaxLength(15);
         }
     }
 }

@@ -5,9 +5,9 @@ namespace api.Repositories.Interfaces
     public interface IClientRepository
     {
         Task<List<ClientModel>> index();
-        Task<ClientModel> show(string id);
+        Task<ClientModel> show(int id);
         Task<ClientModel> store(ClientModel client);
-        Task<ClientModel> update(ClientModel client, string id);
-        Task<bool> delete(string id);
+        Task<ClientModel> update(ClientModel client, int id);
+        Task<bool> delete(int id);
     }
 }

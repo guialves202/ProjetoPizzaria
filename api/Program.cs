@@ -17,7 +17,11 @@ builder.Services.AddEntityFrameworkSqlServer()
         options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
     );
 
-//builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IExtraRepository, ExtraRepository>();
+builder.Services.AddScoped<IFlavorRepository, FlavorRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
 
 var app = builder.Build();
 
