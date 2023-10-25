@@ -1,4 +1,6 @@
-﻿using api.Models;
+﻿using api.Exceptions;
+using api.Models;
+using api.Repositories;
 using api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,36 +20,75 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ClientModel>>> index()
         {
-            List<ClientModel> clients = await _clientRepository.index();
-            return Ok(clients);
+            try
+            {
+                List<ClientModel> clients = await _clientRepository.index();
+                return Ok(clients);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ClientModel>> show(int id)
         {
-            ClientModel client = await _clientRepository.show(id);
-            return Ok(client);
+            try
+            {
+                ClientModel client = await _clientRepository.show(id);
+                if (client == null)
+                {
+                    return NotFound("Client not found");
+                }
+                return Ok(client);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult<ClientModel>> store([FromBody] ClientModel client)
         {
-            ClientModel clientStored = await _clientRepository.store(client);
-            return Ok(clientStored);
+            try
+            {
+                ClientModel clientStored = await _clientRepository.store(client);
+                return Ok(clientStored);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<ClientModel>> update([FromBody] ClientModel client, int id)
         {
-            ClientModel clientUpdated = await _clientRepository.update(client, id);
-            return Ok(clientUpdated);
+            try
+            {
+                ClientModel clientUpdated = await _clientRepository.update(client, id);
+                return Ok(clientUpdated);
+            }
+            catch (HttpException ex)
+            {
+                return StatusCode(ex.HttpCode, ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> delete(int id)
         {
-            bool clientWasDeleted = await _clientRepository.delete(id);
-            return Ok(clientWasDeleted);
+            try
+            {
+                bool clientWasDeleted = await _clientRepository.delete(id);
+                return Ok(clientWasDeleted);
+            }
+            catch (HttpException ex)
+            {
+                return StatusCode(ex.HttpCode, ex.Message);
+            }
         }
     }
 }

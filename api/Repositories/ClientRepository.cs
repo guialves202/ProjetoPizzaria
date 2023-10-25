@@ -47,6 +47,7 @@ namespace api.Repositories
             clientFound.Complement = client.Complement;
             clientFound.City = client.City;
             clientFound.PhoneNumber = client.PhoneNumber;
+            clientFound.OrderId = client.OrderId;
 
             _dbContext.Clients.Update(clientFound);
             await _dbContext.SaveChangesAsync();

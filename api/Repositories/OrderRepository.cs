@@ -20,7 +20,7 @@ namespace api.Repositories
 
         public async Task<OrderModel> show(int id)
         {
-            return await _dbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Orders.Include(p => p.Client).Include(p => p.Pizzas).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<OrderModel> store(OrderModel order)
@@ -42,6 +42,8 @@ namespace api.Repositories
 
             orderFound.Price = order.Price;
             orderFound.PaymentMethod = order.PaymentMethod;
+            orderFound.Client = order.Client;
+            orderFound.Pizzas = order.Pizzas;
 
             _dbContext.Orders.Update(orderFound);
             await _dbContext.SaveChangesAsync();

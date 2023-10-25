@@ -1,4 +1,5 @@
 ﻿using api.Data;
+using api.Exceptions;
 using api.Models;
 using api.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -37,7 +38,7 @@ namespace api.Repositories
 
             if (extraFound == null)
             {
-                throw new Exception("Extra not found");
+                throw new HttpException(404, "Extra not found");
             }
 
             extraFound.Extra = extra.Extra;
@@ -56,7 +57,7 @@ namespace api.Repositories
 
             if (extraFound == null)
             {
-                throw new Exception("Extra not found");
+                throw new HttpException(404, "Extra not found");
             }
 
             _dbContext.Extras.Remove(extraFound);

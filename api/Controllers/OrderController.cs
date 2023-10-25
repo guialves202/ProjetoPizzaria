@@ -1,4 +1,5 @@
 ﻿using api.Models;
+using api.Repositories;
 using api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,36 +19,76 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<OrderModel>>> index()
         {
-            List<OrderModel> orders = await _orderRepository.index();
-            return Ok(orders);
+            try
+            {
+                List<OrderModel> orders = await _orderRepository.index();
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderModel>> show(int id)
         {
-            OrderModel order = await _orderRepository.show(id);
-            return Ok(order);
+            try
+            {
+                OrderModel order = await _orderRepository.show(id);
+                if (order == null) 
+                {
+                    return NotFound("Order not found");
+                }
+                return Ok(order);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+            
         }
 
         [HttpPost]
         public async Task<ActionResult<OrderModel>> store([FromBody] OrderModel order)
         {
-            OrderModel orderStored = await _orderRepository.store(order);
-            return Ok(orderStored);
+            try
+            {
+                OrderModel orderStored = await _orderRepository.store(order);
+                return Ok(orderStored);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<OrderModel>> update([FromBody] OrderModel order, int id)
         {
-            OrderModel orderUpdated = await _orderRepository.update(order, id);
-            return Ok(orderUpdated);
+            try
+            {
+                OrderModel orderUpdated = await _orderRepository.update(order, id);
+                return Ok(orderUpdated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> delete(int id)
         {
-            bool orderWasDeleted = await _orderRepository.delete(id);
-            return Ok(orderWasDeleted);
+            try
+            {
+                bool orderWasDeleted = await _orderRepository.delete(id);
+                return Ok(orderWasDeleted);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using api.Models;
+using api.Repositories;
 using api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,36 +19,75 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<PizzaModel>>> index()
         {
-            List<PizzaModel> pizzas = await _pizzaRepository.index();
-            return Ok(pizzas);
+            try
+            {
+                List<PizzaModel> pizzas = await _pizzaRepository.index();
+                return Ok(pizzas);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<PizzaModel>> show(int id)
         {
-            PizzaModel pizza = await _pizzaRepository.show(id);
-            return Ok(pizza);
+            try
+            {
+                PizzaModel pizza = await _pizzaRepository.show(id);
+                if (pizza == null)
+                {
+                    return NotFound("Pizza not found");
+                }
+                return Ok(pizza);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult<PizzaModel>> store([FromBody] PizzaModel pizza)
         {
-            PizzaModel pizzaStored = await _pizzaRepository.store(pizza);
-            return Ok(pizzaStored);
+            try
+            {
+                PizzaModel pizzaStored = await _pizzaRepository.store(pizza);
+                return Ok(pizzaStored);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<PizzaModel>> update([FromBody] PizzaModel pizza, int id)
         {
-            PizzaModel pizzaUpdated = await _pizzaRepository.update(pizza, id);
-            return Ok(pizzaUpdated);
+            try
+            {
+                PizzaModel pizzaUpdated = await _pizzaRepository.update(pizza, id);
+                return Ok(pizzaUpdated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> delete(int id)
         {
-            bool pizzaWasDeleted = await _pizzaRepository.delete(id);
-            return Ok(pizzaWasDeleted);
+            try
+            {
+                bool pizzaWasDeleted = await _pizzaRepository.delete(id);
+                return Ok(pizzaWasDeleted);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
         }
     }
 }

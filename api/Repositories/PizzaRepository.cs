@@ -44,6 +44,7 @@ namespace api.Repositories
             pizzaFound.Notes = pizza.Notes;
             pizzaFound.Extras = pizza.Extras;
             pizzaFound.Flavors = pizza.Flavors;
+            pizzaFound.OrderId = pizza.OrderId;
 
             _dbContext.Pizzas.Update(pizzaFound);
             await _dbContext.SaveChangesAsync();
