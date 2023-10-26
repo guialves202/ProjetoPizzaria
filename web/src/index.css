@@ -41,3 +41,13 @@ button:hover {
 body {
   background-color: var(--terceary);
 }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.dashboard-active {
+  background-color: var(--terceary);
+  color: var(--black);
+}

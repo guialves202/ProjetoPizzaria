@@ -1,9 +1,9 @@
 import './App.css'
-import Header from './components/Header'
-import Main from './components/Main'
-import Contact from './components/Contact'
-import BestSeller from './components/BestSeller'
-import Menu from './components/Menu'
+import Header from './components/default/Header'
+import Main from './components/Home/Main'
+import Contact from './components/default/Contact'
+import BestSeller from './components/Home/BestSellers'
+import Menu from './components/Home/Menu'
 
 function App() {
   return (
