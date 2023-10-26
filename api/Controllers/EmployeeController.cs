@@ -9,21 +9,21 @@ namespace api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
-        private readonly IClientRepository _clientRepository;
-        public ClientController(IClientRepository clientRepository)
+        private readonly IEmployeeRepository _employeeRepository;
+        public EmployeeController(IEmployeeRepository employeeRepository)
         {
-            _clientRepository = clientRepository;
+            _employeeRepository = employeeRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ClientModel>>> index()
+        public async Task<ActionResult<List<EmployeeModel>>> index()
         {
             try
             {
-                List<ClientModel> clients = await _clientRepository.index();
-                return Ok(clients);
+                List<EmployeeModel> employees = await _employeeRepository.index();
+                return Ok(employees);
             }
             catch (Exception ex)
             {
@@ -32,16 +32,16 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ClientModel>> show(int id)
+        public async Task<ActionResult<EmployeeModel>> show(int id)
         {
             try
             {
-                ClientModel client = await _clientRepository.show(id);
-                if (client == null)
+                EmployeeModel employee = await _employeeRepository.show(id);
+                if (employee == null)
                 {
-                    return NotFound("Client not found");
+                    return NotFound("Employee not found");
                 }
-                return Ok(client);
+                return Ok(employee);
             }
             catch (Exception ex)
             {
@@ -50,12 +50,12 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ClientModel>> store([FromBody] ClientModel client)
+        public async Task<ActionResult<EmployeeModel>> store([FromBody] EmployeeModel employee)
         {
             try
             {
-                ClientModel clientStored = await _clientRepository.store(client);
-                return Ok(clientStored);
+                EmployeeModel employeeStored = await _employeeRepository.store(employee);
+                return Ok(employeeStored);
             }
             catch (Exception ex)
             {
@@ -64,12 +64,12 @@ namespace api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ClientModel>> update([FromBody] ClientModel client, int id)
+        public async Task<ActionResult<EmployeeModel>> update([FromBody] EmployeeModel employee, int id)
         {
             try
             {
-                ClientModel clientUpdated = await _clientRepository.update(client, id);
-                return Ok(clientUpdated);
+                EmployeeModel employeeUpdated = await _employeeRepository.update(employee, id);
+                return Ok(employeeUpdated);
             }
             catch (HttpException ex)
             {
@@ -82,8 +82,8 @@ namespace api.Controllers
         {
             try
             {
-                bool clientWasDeleted = await _clientRepository.delete(id);
-                return Ok(clientWasDeleted);
+                bool employeeWasDeleted = await _employeeRepository.delete(id);
+                return Ok(employeeWasDeleted);
             }
             catch (HttpException ex)
             {

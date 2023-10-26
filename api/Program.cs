@@ -22,6 +22,7 @@ builder.Services.AddScoped<IExtraRepository, ExtraRepository>();
 builder.Services.AddScoped<IFlavorRepository, FlavorRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IPizzaRepository, PizzaRepository>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 var app = builder.Build();
 

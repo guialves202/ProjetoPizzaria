@@ -20,6 +20,7 @@ namespace api.Data
         public DbSet<FlavorModel> Flavors { get; set; }
         public DbSet<OrderModel> Orders { get; set; }
         public DbSet<PizzaModel> Pizzas { get; set; }
+        public DbSet<EmployeeModel> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

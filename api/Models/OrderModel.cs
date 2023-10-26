@@ -1,4 +1,6 @@
-﻿namespace api.Models
+﻿using api.Enums;
+
+namespace api.Models
 {
     public class OrderModel
     {
@@ -9,5 +11,6 @@
         public string PaymentMethod { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public OrderStatus Status { get; set; }
     }
 }
