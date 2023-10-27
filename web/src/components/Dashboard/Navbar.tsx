@@ -13,12 +13,12 @@ function Navbar() {
       </div>
 
       <div className="flex flex-col">
-        <Link to={"/dashboard/index"} className="text-xl text-white hover:bg-terceary hover:text-black pl-10 py-4 flex items-center gap-2 dashboard-active">
+        <Link to={"/dashboard/orders"} className="text-xl text-white hover:bg-terceary hover:text-black pl-10 py-4 flex items-center gap-2 dashboard-active">
           <VscSearch />
           Verificar pedidos
         </Link>
 
-        <Link to={"/dashboard/store"} className="text-xl text-white hover:bg-terceary hover:text-black pl-10 py-4 flex items-center gap-2">
+        <Link to={"/dashboard/orders/add"} className="text-xl text-white hover:bg-terceary hover:text-black pl-10 py-4 flex items-center gap-2">
           <IoAddCircleOutline />
           Registrar pedido
         </Link>
@@ -26,6 +26,16 @@ function Navbar() {
         <Link to={"/dashboard/update"} className="text-xl text-white hover:bg-terceary hover:text-black pl-10 py-4 flex items-center gap-2">
           <FiEdit />
           Modificar pedido
+        </Link>
+
+        <Link to={"/dashboard/flavors"} className="text-xl text-white hover:bg-terceary hover:text-black pl-10 py-4 flex items-center gap-2">
+          <FiEdit />
+          Sabores
+        </Link>
+
+        <Link to={"/dashboard/extras"} className="text-xl text-white hover:bg-terceary hover:text-black pl-10 py-4 flex items-center gap-2">
+          <FiEdit />
+          Adicionais
         </Link>
       </div>
 

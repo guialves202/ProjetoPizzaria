@@ -51,3 +51,8 @@ body {
   background-color: var(--terceary);
   color: var(--black);
 }
+
+.orders-table th, td {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem;
+}
