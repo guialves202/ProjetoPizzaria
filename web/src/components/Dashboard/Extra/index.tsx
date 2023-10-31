@@ -1,6 +1,12 @@
+import AddExtra from "./AddExtra"
+import ListExtras from "./ListExtra"
+
 function Extra() {
   return (
-    <h1>Oi2</h1>
+    <div className="flex flex-col gap-10 items-center p-6">
+      <ListExtras />
+      <AddExtra />
+    </div>
   )
 }
 
