@@ -18,6 +18,7 @@
   --gray: #222222;
   --soft-white: #f1f1f1;
   --yellow: #fac900;
+  --blue: #0096ff;
 }
 
 * {
@@ -53,6 +54,13 @@ body {
 }
 
 .orders-table th, td {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #222;
   padding: 1rem;
+  text-align: center;
+}
+
+.btn {
+  background-color: red;
+  padding: 10px 1rem;
+  border-radius: 8px;
 }

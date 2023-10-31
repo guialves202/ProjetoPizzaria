@@ -15,6 +15,7 @@ export default {
       'gray': '#222222',
       'soft-white': '#f1f1f1',
       'yellow': '#fac900',
+      'blue': '#0096ff'
     },
     extend: {},
   },
