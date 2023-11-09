@@ -1,4 +1,4 @@
-function BestSeller() {
+export function BestSeller() {
   return (
     <section className="flex flex-col items-center justify-start bg-terceary p-4 gap-3 h-screen py-20">
       <h1 className="text-7xl font-bold">Mais vendidas</h1>
@@ -32,5 +32,3 @@ function BestSeller() {
     </section>
   )
 }
-
-export default BestSeller

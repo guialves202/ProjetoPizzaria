@@ -3,7 +3,7 @@ import { VscSearch, VscSignOut } from 'react-icons/vsc'
 import { IoAddCircleOutline } from 'react-icons/io5'
 import { FiEdit } from 'react-icons/fi'
 
-function Navbar() {
+export function Navbar() {
   return (
     <div className="bg-secondary text-black h-screen flex flex-col relative">
       <div className="p-10">
@@ -49,5 +49,3 @@ function Navbar() {
     </div>
   )
 }
-
-export default Navbar

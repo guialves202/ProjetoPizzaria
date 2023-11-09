@@ -1,13 +1,11 @@
-import AddFlavor from "./AddFlavor"
-import ListFlavors from "./ListFlavors"
+import { AddFlavor } from "./AddFlavor"
+import { ListFlavors } from "./ListFlavors"
 
-function Flavor() {
+export function Flavor() {
   return (
-    <div className="flex flex-col gap-10 items-center p-6">
+    <div className="flex flex-col gap-10 items-center p-6 h-[100vh]">
       <ListFlavors />
       <AddFlavor />
     </div>
   )
 }
-
-export default Flavor

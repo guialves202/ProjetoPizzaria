@@ -1,4 +1,4 @@
-function Header() {
+export function Header() {
   return (
     <header className="flex items-center py-4 px-10 justify-between h-20">
       <figure className="flex items-center gap-5 text-yellow text-5xl">
@@ -16,5 +16,3 @@ function Header() {
     </header>
   )
 }
-
-export default Header

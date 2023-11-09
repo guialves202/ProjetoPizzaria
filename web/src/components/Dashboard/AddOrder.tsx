@@ -1,4 +1,4 @@
-function AddOrder() {
+export function AddOrder() {
   return (
     <div className="flex items-center py-8 flex-col gap-16">
       <h1 className="text-5xl">Registrar pedido</h1>
@@ -46,5 +46,3 @@ function AddOrder() {
     </div>
   )
 }
-
-export default AddOrder

@@ -27,7 +27,6 @@
   box-sizing: border-box;
   text-decoration: none;
   outline: none;
-  list-style: none;
 }
 
 button {
@@ -53,7 +52,7 @@ body {
   color: var(--black);
 }
 
-.orders-table th, td {
+.list-table th, td {
   border-bottom: 1px solid #222;
   padding: 1rem;
   text-align: center;

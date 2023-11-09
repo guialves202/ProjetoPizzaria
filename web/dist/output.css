@@ -594,6 +594,10 @@ video {
   height: 10rem;
 }
 
+.h-\[100vh\] {
+  height: 100vh;
+}
+
 .h-\[50\%\] {
   height: 50%;
 }
@@ -634,12 +638,20 @@ video {
   width: 80%;
 }
 
+.w-\[90\%\] {
+  width: 90%;
+}
+
 .w-full {
   width: 100%;
 }
 
 .max-w-\[90\%\] {
   max-width: 90%;
+}
+
+.list-decimal {
+  list-style-type: decimal;
 }
 
 .grid-cols-2 {
@@ -678,10 +690,6 @@ video {
   justify-content: space-between;
 }
 
-.justify-around {
-  justify-content: space-around;
-}
-
 .justify-evenly {
   justify-content: space-evenly;
 }
@@ -718,10 +726,6 @@ video {
   gap: 1.5rem;
 }
 
-.gap-8 {
-  gap: 2rem;
-}
-
 .overflow-auto {
   overflow: auto;
 }
@@ -736,6 +740,10 @@ video {
 
 .rounded-full {
   border-radius: 9999px;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
 }
 
 .border-solid {
@@ -982,7 +990,6 @@ video {
   box-sizing: border-box;
   text-decoration: none;
   outline: none;
-  list-style: none;
 }
 
 button {
@@ -1008,7 +1015,7 @@ body {
   color: var(--black);
 }
 
-.orders-table th, td {
+.list-table th, td {
   border-bottom: 1px solid #222;
   padding: 1rem;
   text-align: center;

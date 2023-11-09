@@ -1,13 +1,11 @@
-import AddExtra from "./AddExtra"
-import ListExtras from "./ListExtra"
+import { AddExtra } from "./AddExtra"
+import { ListExtras } from "./ListExtra"
 
-function Extra() {
+export function Extra() {
   return (
-    <div className="flex flex-col gap-10 items-center p-6">
+    <div className="flex flex-col gap-10 items-center p-6 h-[100vh]">
       <ListExtras />
       <AddExtra />
     </div>
   )
 }
-
-export default Extra

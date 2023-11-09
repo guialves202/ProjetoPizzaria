@@ -1,4 +1,4 @@
-function Menu() {
+export function Menu() {
   return (
     <section className="flex flex-col gap-4 items-center bg-secondary py-6 min-h-screen">
       <h1 className="text-7xl font-bold text-yellow">Menu</h1>
@@ -49,5 +49,3 @@ function Menu() {
     </section>
   )
 }
-
-export default Menu

@@ -1,4 +1,4 @@
-function Main() {
+export function Main() {
   return (
     <section className="h-[calc(100vh-80px)] flex items-center justify-center">
       <img src="/images/pizza-banner4.jpg" className="absolute top-0 left-0 -z-50 brightness-50"></img>
@@ -11,5 +11,3 @@ function Main() {
     </section>
   )
 }
-
-export default Main

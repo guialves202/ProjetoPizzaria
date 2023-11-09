@@ -1,4 +1,4 @@
-function Footer() {
+export function Contact() {
   return (
     <footer className="bg-yellow py-8 flex flex-col items-center gap-14">
       <h1 className="text-3xl font-bold">Contact</h1>
@@ -34,5 +34,3 @@ function Footer() {
     </footer>
   )
 }
-
-export default Footer
