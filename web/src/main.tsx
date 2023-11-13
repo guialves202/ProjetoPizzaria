@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import { Flavor } from './components/Dashboard/Flavor/index.tsx'
 import { Orders } from './components/Dashboard/Orders.tsx'
-import { AddOrder } from './components/Dashboard/AddOrder.tsx'
+import { AddOrder } from './components/Dashboard/AddOrder/AddOrder.tsx'
 import { Extra } from './components/Dashboard/Extra/index.tsx'
 
 const router = createBrowserRouter([
