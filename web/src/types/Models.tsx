@@ -25,12 +25,12 @@ export type ClientModel = {
 }
 
 export type PizzaModel = {
-  id: number
+  id?: number
   flavors: string[]
   extras: string[]
   price: number
   notes: string
-  orderId: number
+  orderId?: number
 }
 
 export type OrderModel = {

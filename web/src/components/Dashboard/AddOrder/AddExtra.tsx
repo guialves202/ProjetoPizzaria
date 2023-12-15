@@ -2,7 +2,11 @@ import { useEffect, useState } from "react"
 import { ExtraModel } from "../../../types/Models"
 import axios from "axios"
 
-export function AddExtra() {
+type Props = {
+  setExtra: React.Dispatch<React.SetStateAction<string[]>>
+}
+
+export function AddExtra({setExtra}: Props) {
   const [extras, setExtras] = useState<ExtraModel[]>([])
 
   useEffect(() => {
@@ -17,6 +21,20 @@ export function AddExtra() {
 
     getExtras()
   }, [])
+
+  const addOrRemove = (extra: string) => {
+    setExtra(prevState => {
+      const newExtras = [...prevState]
+      const index = newExtras.indexOf(extra)
+      if (index === -1) {
+        newExtras.push(extra)
+        return newExtras
+      }
+
+      newExtras.splice(index, 1)
+      return newExtras
+    })
+  }
 
   return (
     <div className="step-2 hidden flex-col gap-6 items-center justify-center w-full">
@@ -36,7 +54,7 @@ export function AddExtra() {
               return (
                 <tr key={index}>
                   <td>
-                    <input type="checkbox" />
+                    <input type="checkbox" onClick={() => addOrRemove(extra.extra)} />
                   </td>
                   <td>{extra.extra}</td>
                   <td>{extra.description}</td>

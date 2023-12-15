@@ -2,7 +2,11 @@ import { useEffect, useState } from "react"
 import { FlavorModel } from "../../../types/Models"
 import axios from "axios"
 
-export function AddFlavor() {
+type Props = {
+  setFlavor: React.Dispatch<React.SetStateAction<string[]>>
+}
+
+export function AddFlavor({setFlavor}: Props) {
   const [flavors, setFlavors] = useState<FlavorModel[]>([])
 
   useEffect(() => {
@@ -17,6 +21,20 @@ export function AddFlavor() {
 
     getFlavors()
   }, [])
+
+  const addOrRemove = (flavor: string) => {
+    setFlavor(prevState => {
+      const newFlavors = [...prevState]
+      const index = newFlavors.indexOf(flavor)
+      if (index === -1) {
+        newFlavors.push(flavor)
+        return newFlavors
+      }
+
+      newFlavors.splice(index, 1)
+      return newFlavors
+    })
+  }
 
   return (
     <div className="step-1 hidden flex-col gap-6 items-center justify-center w-full">
@@ -36,7 +54,7 @@ export function AddFlavor() {
               return (
                 <tr key={index}>
                   <td>
-                    <input type="checkbox" />
+                    <input type="checkbox" onClick={() => addOrRemove(flavor.flavor)} />
                   </td>
                   <td>{flavor.flavor}</td>
                   <td>{flavor.description}</td>
